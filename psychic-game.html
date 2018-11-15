@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Trigger Clicked</title>
+
+  <!-- Added link to the jQuery Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+  <h1>Guees what letter I'm thinking of.</h1>
+  <h3>Your Guess: <div id="userGuess"></div> </h3>
+  <h3>Wins: <div id="wins"></div> </h3></h3>
+  <h3>Losses: <div id="losses"></div> </h3></h3>
+  <h3>Lives: <div id="lives"></div> </h3></h3>
+
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+    // letter array
+      var alpha = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"
+      ];
+    // computer's random guess
+      var compguess = alpha[Math.floor(Math.random() * alpha.length)]; 
+      console.log(compguess);
+    //   wins and loss trackers
+      var wins = 0;
+      var losses = 0;
+      var lives = 9;
+    // keypress
+
+      $(document).on("keypress",function(event) {
+        //   win condtion with if else statement.
+        if (event.key === compguess){
+            wins++
+            $("#wins").text(wins);
+            $("#userGuess").text(event.key);
+            compguess = alpha[Math.floor(Math.random() * alpha.length)];
+            console.log(compguess);
+
+        }
+        else if (lives === 0){
+          location.reload();
+
+        }
+        else {
+            losses++
+            lives--
+            $("#losses").text(losses);
+            $("#lives").text(lives);
+            $("#userGuess").text(event.key);
+        }
+      })
+
+    });
+
+</script>
+
+</body>
+
+</html>
